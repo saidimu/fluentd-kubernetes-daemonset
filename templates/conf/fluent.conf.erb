@@ -43,6 +43,17 @@
    log_level info
    loggly_url "https://logs-01.loggly.com/inputs/#{ENV['LOGGLY_TOKEN']}/tag/fluentd"
 </match>
+<%  when "graylog"%>
+<match **>
+   type graylog
+   log_level info
+   host "#{ENV['GRAYLOG_HOST']}"
+   port "#{ENV['GRAYLOG_PORT']}"
+
+   # BufferedOutput config
+   flush_interval 30
+   num_threads 2
+</match>
 <%  when "cloudwatch"%>
 <match **>
   type cloudwatch_logs
